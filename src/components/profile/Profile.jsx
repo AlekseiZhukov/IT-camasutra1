@@ -1,19 +1,29 @@
 import React from 'react';
-import s from './Profile.module.css'
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import {Redirect} from "react-router-dom";
+import {updateUserStatus} from "../../redux/profileReducer";
 
-import MyPosts from './MyPosts/MyPosts';
+const Profile = (props) => {
 
-const Profile = () => {
     return (
-        <div className={s.content}>
-            <div>
-                <img src='https://jssors8.azureedge.net/demos/image-slider/img/faded-monaco-scenery-evening-dark-picjumbo-com-image.jpg' />
-            </div>
-
-            <MyPosts />
+        <div >
+            <ProfileInfo
+                profile={props.profile}
+                status={props.status}
+                updateUserStatus={props.updateUserStatus}
+            />
+            <MyPostsContainer />
         </div >
     )
 }
 
 
 export default Profile
+
+// <MyPosts
+//     posts={props.state.posts}
+//     newPostText={props.state.newPostText}
+//     dispatch={props.dispatch}
+//
+// />

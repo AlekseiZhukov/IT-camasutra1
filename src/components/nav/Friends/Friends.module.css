@@ -1,0 +1,28 @@
+.title {
+    margin: 0;
+    font-weight: lighter;
+    font-size: 36px;
+    color: white;
+}
+.block {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr [col-start]);
+    grid-gap: 10px;
+    justify-items: center;
+    justify-content: space-between;
+}
+
+.blockItem {
+    text-align: center;
+}
+.blockItem p {
+    color: white;
+    margin: 0 auto;
+}
+.circle {
+    margin: 0 auto;
+    background: gold;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}

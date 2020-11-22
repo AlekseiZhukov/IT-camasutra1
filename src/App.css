@@ -7,5 +7,11 @@
   grid-template-rows: 60px 1fr;
   grid-template-columns: 2fr 10fr;
   grid-gap: 10px;
-  width: 1200px;
+  max-width: 1200px;
+}
+
+.app_wrapper_content {
+  grid-area: c;
+  background: cornflowerblue;
+
 }

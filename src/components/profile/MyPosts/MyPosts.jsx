@@ -3,18 +3,32 @@ import s from './MyPosts.module.css'
 import Post from './Post/Post';
 
 const MyPosts = (props) => {
-    debugger;
+
+    const postItem = props.posts.map(p => <Post message={p.message} likesCount={p.likesCount} key={p.id}/>)
+
+    const addPost = () => {
+        props.addPost()
+    }
+
+    const onPostChange= (event) => {
+        let newText = event.target.value;
+        props.updateNewPostText(newText)
+    }
+
     return (
-        <div>
-            My posts
-                
+        <div className={s.postsBlock}>
+            <h3>My posts</h3>
             <div>
-                New post
+                <textarea
+                    onChange={ onPostChange }
+                    value={props.newPostText}
+                />
+            </div>
+            <div>
+                <button onClick={ addPost } >Add post</button>
             </div>
             <div className={s.posts}>
-            <Post message ='Hi, how are you?' src='https://fsb.zobj.net/crop.php?r=5a-j9iwed47sGHVmkzCYJsZUP5ni5bN-ZPRcaygQQKH1iT8MxbxDatSYsuDSRoWeQzoqkOBh40NdDtOhMM0Y47TiotH3MDRn0OjaUapG2dNi7Emt3lIPPaaLCOMifwX6cF_NHKFeZFadoTvh'/>    
-            <Post message ="It's my first post" src='https://fsb.zobj.net/crop.php?r=5a-j9iwed47sGHVmkzCYJsZUP5ni5bN-ZPRcaygQQKH1iT8MxbxDatSYsuDSRoWeQzoqkOBh40NdDtOhMM0Y47TiotH3MDRn0OjaUapG2dNi7Emt3lIPPaaLCOMifwX6cF_NHKFeZFadoTvh'/>
-            
+                {postItem}
             </div>
         </div>
     )
