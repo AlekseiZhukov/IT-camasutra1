@@ -1,5 +1,5 @@
 const ADD_MESSAGE = 'ADD-MESSAGE';
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+//const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
 
 let initialState = {
     messages : [
@@ -18,7 +18,7 @@ let initialState = {
         {id: 5, name: "Alex"},
         {id: 6, name: "Olya"}
     ],
-    newMessageBody: '',
+
 }
 
 const dialogsReducer = ( state = initialState, action) => {
@@ -26,31 +26,31 @@ const dialogsReducer = ( state = initialState, action) => {
     switch (action.type) {
         case ADD_MESSAGE:
             let newMessage = {
-                id: 8,
-                message: state.newMessageBody,
+                id: 20,
+                message: action.newMessageBody,
                 likesCount: 0
             };
             return {
                 ...state,
-                newMessageBody: '',
                 messages: [...state.messages, newMessage]
             };
 
-        case UPDATE_NEW_MESSAGE_TEXT:
+        /*case UPDATE_NEW_MESSAGE_TEXT:
             return {
                 ...state,
                 newMessageBody: action.textMessage
             };
-
+*/
         default:
             return state
     }
 
 }
 
-export const addMessageActionCreator = () => ({type: ADD_MESSAGE});
-
-export const updateNewMessageTextActionCreator = (textMessage) =>
-    ({type: UPDATE_NEW_MESSAGE_TEXT, textMessage: textMessage})
+export const addMessageActionCreator = (newMessageBody) => ({type: ADD_MESSAGE, newMessageBody});
+//action creator ниже больше не нужен, т.к. мы подключили reduxForm и теперь он занимается
+//контролем поля ввода
+//export const updateNewMessageTextActionCreator = (textMessage) =>
+//   ({type: UPDATE_NEW_MESSAGE_TEXT, textMessage: textMessage})
 
 export  default dialogsReducer;

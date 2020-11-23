@@ -1,8 +1,8 @@
 import React from 'react';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import {Redirect} from "react-router-dom";
-import {updateUserStatus} from "../../redux/profileReducer";
+//import {Redirect} from "react-router-dom";
+//import {updateUserStatus} from "../../redux/profileReducer";
 
 const Profile = (props) => {
 

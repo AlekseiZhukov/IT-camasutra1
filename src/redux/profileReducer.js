@@ -1,7 +1,5 @@
 import {profileApi, usersApi} from "../api/api";
-
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS'
 
@@ -11,7 +9,7 @@ let initialState = {
         {id: 2, message: "It's my first post", likesCount: 11},
         {id: 3, message: "Bla-bla", likesCount: 0},
     ],
-    newPostText: 'it-kamasutra.com',
+
     profile: null,
     status: ""
 }
@@ -22,7 +20,7 @@ const profileReducer = (state = initialState, action ) => {
         case ADD_POST:
             let newPost = {
                 id: 5,
-                message: state.newPostText,
+                message: action.newPost,
                 likesCount: 0
             };
             return {
@@ -31,11 +29,7 @@ const profileReducer = (state = initialState, action ) => {
                 posts: [...state.posts, newPost]
             }
 
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.newText
-            };
+
         case SET_USER_PROFILE:
             return {
                 ...state,
@@ -52,10 +46,8 @@ const profileReducer = (state = initialState, action ) => {
     }
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST });
+export const addPostActionCreator = (newPost) => ({type: ADD_POST, newPost });
 const setUserProfile =(profile) => ({type:SET_USER_PROFILE, profile: profile})
-export const updateNewPostTextActionCreator = (newText) =>
-    ({type: UPDATE_NEW_POST_TEXT, newText: newText });
 const setStatusUser = (status) => ({type: SET_STATUS, status})
 
 // DAL lear
