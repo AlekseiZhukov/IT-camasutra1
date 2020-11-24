@@ -24,7 +24,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 
 }
-//const AuthRedirectComponent = withAuthRedirect(Dialogs);
+//const AuthRedirectComponent = withAuthRedirect(AddMessageForm);
 //const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 
 export default compose(

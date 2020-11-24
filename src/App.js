@@ -46,7 +46,7 @@ const App = (props) => {
 export default App;
 
 /*
-<Dialogs
+<AddMessageForm
 
     state={props.store.getState().dialogsPage}
     dispatch={props.dispatch}
