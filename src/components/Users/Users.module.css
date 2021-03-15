@@ -3,12 +3,3 @@
     height: 50px;
     border-radius: 50%;
 }
-.selectedPage,
-.numberPage {
-    margin: 10px 0 10px 10px;
-    cursor: pointer;
-    font-size:18px ;
-}
-.selectedPage {
-    font-weight: bold;
-}

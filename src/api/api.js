@@ -15,10 +15,10 @@ export const usersApi = {
             .then(response => response.data)
     },
     followUser (userId) {
-        return instance.post(`follow/${userId}`).then(response => response.data)
+        return instance.post(`follow/${userId}`)
     },
     unfollowUser (userId) {
-        return instance.delete(`follow/${userId}`).then(response => response.data)
+        return instance.delete(`follow/${userId}`)
     },
     getProfileUser (userId) {
         console.warn('Obsolete method. Please profileSpi object.')
@@ -29,21 +29,27 @@ export const usersApi = {
 export const profileApi = {
 
     getProfileUser (userId) {
-        return instance.get(`profile/${userId}`).then(response => response.data)
+        return instance.get(`profile/${userId}`)
     },
     getStatusUser (userId) {
-        return instance.get(`profile/status/${userId}`).then(response => response.data)
+        return instance.get(`profile/status/${userId}`)
     },
     updateStatusUser(status) {
         return instance.put(`profile/status/`,
             {
             status: status
-        }).then(response => response.data)
+        })
     }
 };
 
 export const authMeApi = {
     authUser () {
-        return instance.get('auth/me').then(response => response.data)
+        return instance.get('auth/me')
+    },
+    login (email, password, rememberMe = false) {
+        return instance.post("auth/login", {email, password, rememberMe})
+    },
+    logout () {
+        return instance.delete("auth/login")
     }
 }

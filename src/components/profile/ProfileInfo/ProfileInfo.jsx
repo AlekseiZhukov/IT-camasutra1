@@ -1,27 +1,25 @@
 import React from 'react';
 import s from './ProfileInfo.module.css'
 import Preloader from "../../common/Preloader/Preloader";
-import ProfileStatus from './ProfileStatus'
-import {updateUserStatus} from "../../../redux/profileReducer";
+import ProfileStatusWithHooks from './ProfileStatusWithHooks'
+//import {updateUserStatus} from "../../../redux/profileReducer";
 
 
-const ProfileInfo = (props) => {
-    if (!props.profile) {
+const ProfileInfo = ({profile, status, updateUserStatus}) => {
+    if (!profile) {
         return <Preloader />
     }
     return (
         <div >
-            {/*<div className={s.imageBlock}>*/}
-            {/*    <img src='https://jssors8.azureedge.net/demos/image-slider/img/faded-monaco-scenery-evening-dark-picjumbo-com-image.jpg' alt={""}/>*/}
-            {/*</div>*/}
+
             <div className={s.descriptionBlock}>
-                <h1>{props.profile.fullName}</h1>
-                <img src={props.profile.photos.large} />
-                <ProfileStatus
-                    status={props.status}
-                    updateUserStatus={props.updateUserStatus}
+                <h1>{profile.fullName}</h1>
+                <img src={profile.photos.large} alt={""}/>
+                <ProfileStatusWithHooks
+                    status={status}
+                    updateUserStatus={updateUserStatus}
                 />
-                <p>{props.profile.aboutMe}</p>
+                <p>{profile.aboutMe}</p>
 
             </div>
         </div >

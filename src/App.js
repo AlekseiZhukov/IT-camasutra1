@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './components/nav/Navbar'
 import './App.css';
-import {Route} from "react-router-dom";
+import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -11,39 +11,59 @@ import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/profile/ProfileContainer";
 import HeaderContainer from "./components/header/HeaderContainer";
 import LoginPage from "./components/Login/Login";
+import {connect, Provider} from "react-redux";
+import {compose} from "redux";
+import {initializeApp} from "./redux/app-reducer";
+import Preloader from "./components/common/Preloader/Preloader";
+import store from "./redux/redux-store";
 
 
-const App = (props) => {
+class App extends React.Component {
 
-    return (
-        <div className="app_wrapper">
-            <HeaderContainer />
-            <Navbar />
+    componentDidMount() {
+        this.props.initializeApp()
+    }
 
-            <div className='app_wrapper_content'>
-                <Route path='/dialogs'
-                       render={
-                           () => <DialogsContainer/>
-                       }
-                />
-                <Route path='/profile/:userId?'
-                       render={
-                           () => <ProfileContainer />
-                       }
-                />
-                <Route path='/news' component={News}/>
-                <Route path='/music' component={Music}/>
-                <Route path='/settings' component={Settings}/>
-                <Route path='/friends' render={() => <Friends/>}/>
-                <Route path='/users' render={() => <UsersContainer/>}/>
-                <Route path='/login' render={() => <LoginPage/>}/>
+    render() {
+        if (!this.props.initialized) {
+            return <Preloader/>
+        }
+        return (
+            <div className="app_wrapper">
+                <HeaderContainer/>
+                <Navbar/>
+
+                <div className='app_wrapper_content'>
+                    <Route path='/dialogs'
+                           render={
+                               () => <DialogsContainer/>
+                           }
+                    />
+                    <Route path='/profile/:userId?'
+                           render={
+                               () => <ProfileContainer/>
+                           }
+                    />
+                    <Route path='/news' component={News}/>
+                    <Route path='/music' component={Music}/>
+                    <Route path='/settings' component={Settings}/>
+                    <Route path='/friends' render={() => <Friends/>}/>
+                    <Route path='/users' render={() => <UsersContainer/>}/>
+                    <Route path='/login' render={() => <LoginPage/>}/>
+                </div>
             </div>
-        </div>
 
-    );
+        );
+    }
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+    initialized: state.app.initialized
+})
+
+const AppContainer =  compose(
+    withRouter,
+    connect(mapStateToProps, {initializeApp}))(App);
 
 /*
 <AddMessageForm
@@ -51,3 +71,13 @@ export default App;
     state={props.store.getState().dialogsPage}
     dispatch={props.dispatch}
 />*/
+
+const SamuraiJSApp = (props) => {
+    return <BrowserRouter >
+        <Provider store={store}>
+            <AppContainer />
+        </Provider>
+    </BrowserRouter>
+}
+
+export default SamuraiJSApp
