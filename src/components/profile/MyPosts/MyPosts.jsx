@@ -13,7 +13,7 @@ const MyPosts = React.memo(props => {
     const addNewPost = (value) => {
         props.addPost(value.newPost)
     }
-    console.log("render MyPosts");
+
     return (
         <div className={s.postsBlock}>
             <h3>My posts</h3>

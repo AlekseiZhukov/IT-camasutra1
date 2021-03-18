@@ -21,7 +21,7 @@ export const usersApi = {
         return instance.delete(`follow/${userId}`)
     },
     getProfileUser (userId) {
-        console.warn('Obsolete method. Please profileSpi object.')
+        //console.warn('Obsolete method. Please profileSpi object.')
         return profileApi.getProfileUser(userId)
     },
 };
@@ -39,8 +39,21 @@ export const profileApi = {
             {
             status: status
         })
+    },
+    savePhoto (filePhoto) {
+
+        const formData = new FormData();
+        formData.append("image", filePhoto)
+        return instance.put(`profile/photo`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+    },
+    saveProfile (profile) {
+        return instance.put(`profile`, profile)
     }
-};
+}
 
 export const authMeApi = {
     authUser () {
