@@ -1,7 +1,7 @@
 import React, {Suspense} from 'react';
 import Navbar from './components/nav/Navbar'
 import './App.css';
-import {BrowserRouter, Route, withRouter} from "react-router-dom";
+import {BrowserRouter, Redirect, Route, withRouter} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
@@ -22,9 +22,16 @@ const ProfileContainer = React.lazy(() => import ('./components/profile/ProfileC
 
 
 class App extends React.Component {
-
+    catchAllUnhandledErrors = (promiseRejectionEvent) => {
+        alert("Some error occured");
+        console.error(promiseRejectionEvent)
+    }
     componentDidMount() {
         this.props.initializeApp()
+        window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors)
+    }
+    componentWillUnmount() {
+        window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors)
     }
 
     render() {
@@ -47,6 +54,7 @@ class App extends React.Component {
                                render={() => <ProfileContainer />}
                         />
                     </Suspense>
+                    <Route path='/' render={() => <Redirect to={"/login"} />}/>
                     <Route path='/news' component={News}/>
                     <Route path='/music' component={Music}/>
                     <Route path='/settings' component={Settings}/>

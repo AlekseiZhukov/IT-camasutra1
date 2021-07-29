@@ -6,8 +6,8 @@ let initialState = {
         { id: 3, name: "Sveta"},
     ]
 }
-
-const sidebarReducer = (state = initialState, action) => {
+type initialStateType = typeof initialState
+const sidebarReducer = (state = initialState, action: any): initialStateType => {
 
 
     return state

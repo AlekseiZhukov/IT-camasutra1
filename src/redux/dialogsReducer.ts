@@ -1,5 +1,14 @@
-const ADD_MESSAGE = 'ADD-MESSAGE';
-//const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT';
+const ADD_MESSAGE = 'ADD-MESSAGE'
+//const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE-NEW-MESSAGE-TEXT'
+
+type DialogType = {
+    id: number
+    name: string
+}
+type MessageType = {
+    id: number
+    message: string
+}
 
 let initialState = {
     messages : [
@@ -9,7 +18,7 @@ let initialState = {
         {id: 4, message: "Yo"},
         {id: 5, message: "Yo"},
         {id: 6, message: "Good!"}
-    ],
+    ] as Array<MessageType>,
     dialogs : [
         {id: 1, name: "Dimych"},
         {id: 2, name: "Andrew"},
@@ -17,11 +26,13 @@ let initialState = {
         {id: 4, name: "Sasha"},
         {id: 5, name: "Alex"},
         {id: 6, name: "Olya"}
-    ],
+    ] as Array<DialogType>,
 
 }
 
-const dialogsReducer = ( state = initialState, action) => {
+export type InitialStateType = typeof initialState
+
+const dialogsReducer = ( state = initialState, action: any) :InitialStateType=> {
 
     switch (action.type) {
         case ADD_MESSAGE:
@@ -47,7 +58,12 @@ const dialogsReducer = ( state = initialState, action) => {
 
 }
 
-export const addMessageActionCreator = (newMessageBody) => ({type: ADD_MESSAGE, newMessageBody});
+type addMessageActionCreatorActionType = {
+    type: typeof ADD_MESSAGE
+    newMessageBody: string
+}
+
+export const addMessageActionCreator = (newMessageBody: string): addMessageActionCreatorActionType => ({type: ADD_MESSAGE, newMessageBody});
 //action creator ниже больше не нужен, т.к. мы подключили reduxForm и теперь он занимается
 //контролем поля ввода
 //export const updateNewMessageTextActionCreator = (textMessage) =>
